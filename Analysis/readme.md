@@ -4,4 +4,6 @@ discord - https://discord.gg/d9wFhhnwFe
 
 created by - @h7n
 
+miro - https://miro.com/app/board/uXjVHAlbwYw=/?share_link_id=227022886951
+
 suggestions would be welcomed 
