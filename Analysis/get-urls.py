@@ -87,7 +87,7 @@ class GetAllUrls:
         count = os.popen('wc -l < _LiveUrls_.txt').read().strip()
         print(f'[+]Current URls : {count}')
 
-#Now running all
+#Now running all with threads 
 
     def run_all(self):
         methods = [self.run_gau, self.run_katana,self.run_gau]  # add more here later
