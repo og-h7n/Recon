@@ -22,10 +22,12 @@ class GetAllUrls:
     def __make__file(self,tool):
         Path(f"{tool}.txt")
 
+    #for runnning gau
+
     def run_gau(self):
         self.__make__file('_gau_')
         print(f'[+] File created _gau_.txt')
-        print(f'[+] Running scan on {self.target}')
+        
 
         cmd = (
             f"gau --threads 5 "
@@ -38,13 +40,13 @@ class GetAllUrls:
         print(f'[+] File saved to _gau_.txt')
         
         count = os.popen('wc -l < _gau_.txt').read().strip()
-        print(f'[+] No. of endpoints found: {count}')
+        print(f'[+] Gau found: {count}')
 
-
+# for running katana
     def run_katana(self):
         self.__make__file('_katana_')
         print(f'[+] File created _katana_.txt')
-        print(f'[+] Running scan on {self.target}')
+        
 
         cmd = f'katana -u https://{self.target} -d 3 > _katana_.txt'
 
@@ -53,21 +55,30 @@ class GetAllUrls:
         print(f'[+] File saved to _katana_.txt')
         
         count = os.popen('wc -l < _katana_.txt').read().strip()
-        print(f'[+] Endpoints found: {count}')
-
+        print(f'[+] Katana found: {count}')
+#for spider
     def run_gospider(self):
         self.__make__file("_gospider_")
-        print(f'[+]Starting a gospider scan on the website')
-        print(f'[+]Runnning scan on target {self.target}')
+        print('[+]File created _gospider_.txt')
 
-        cmd = ""
 
-    
+        cmd = (
+            f'gospider -s "https://{self.target}" '
+            f'-c 10 -d 5 --other-source --include-subs --include-other-source '
+            f'--sitemap --robots -w -r -t 20 --js -a '
+            f'-H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)" '
+            f'--timeout 15 -q | anew _gospider_.txt'
+        )
+        os.system(cmd)
+
+        count = os.popen('wc -l < _gospider_.txt').read().strip()
+        print(f'[+] Gospider found {count} endpoints')
+#Removing duplicates -> then checking for their live 
     def rm_junk(self): #removing duplicates
-        self.__make__file('_LiveUrls_.txt')
+        self.__make__file('_LiveUrls_')
         print('[+]Removing duplicates and checking for liveness')
         
-        cmd = 'cat _gau_.txt _katana_.txt | sort -u | httpx -mc 200,301,302,403 -silent  > _LiveUrls_.txt'
+        cmd = 'cat _gau_.txt _katana_.txt _gospider_.txt | sort -u | httpx -mc 200,301,302,403 -silent  > _LiveUrls_.txt' #opening all the files
         print(f'[+]Process complete')
         print(f'[+]File saved to _LiveUrls_.txt')
 
@@ -76,9 +87,10 @@ class GetAllUrls:
         count = os.popen('wc -l < _LiveUrls_.txt').read().strip()
         print(f'[+]Current URls : {count}')
 
+#Now running all
 
     def run_all(self):
-        methods = [self.run_gau, self.run_katana]  # add more here later
+        methods = [self.run_gau, self.run_katana,self.run_gau]  # add more here later
         threads = [threading.Thread(target=m) for m in methods]
 
         for t in threads:
@@ -92,5 +104,5 @@ class GetAllUrls:
 
 
 
-tool = GetAllUrls('example.com')
+tool = GetAllUrls('abc.com')
 tool.run_all()
