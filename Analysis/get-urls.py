@@ -57,6 +57,10 @@ class GetAllUrls:
 
     def run_gospider(self):
         self.__make__file("_gospider_")
+        print(f'[+]Starting a gospider scan on the website')
+        print(f'[+]Runnning scan on target {self.target}')
+
+        cmd = ""
 
     
     def rm_junk(self): #removing duplicates
