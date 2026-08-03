@@ -13,9 +13,9 @@ class GetAllUrls:
     def __init__(self,target):
         self.target = target
 
-    #for creating folder if required
-    def __make__folder(self):
-        os.makedir(folder)
+    #for creating folder
+    def __make__folder(self,folder):
+        os.makedirs(folder)
 
     
     #for creating files for the tools and store there output indivisually   
@@ -33,7 +33,7 @@ class GetAllUrls:
             f"gau --threads 5 "
             f"--providers wayback,commoncrawl,otx,urlscan "
             f"--blacklist png,jpg,gif,svg,css,woff,ttf "
-            f"{self.target} > _gau_.txt"
+            f"{self.target} | anew _gau_.txt"
         )
         os.system(cmd)
         print(f'[+] GAU Scan done')
@@ -48,7 +48,7 @@ class GetAllUrls:
         print(f'[+] File created _katana_.txt')
         
 
-        cmd = f'katana -u https://{self.target} -d 3 > _katana_.txt'
+        cmd = f'katana -u https://{self.target} -d 3 | anew _katana_.txt'
 
         os.system(cmd)
         print(f'[+] Katana Scan done')
@@ -73,14 +73,18 @@ class GetAllUrls:
 
         count = os.popen('wc -l < _gospider_.txt').read().strip()
         print(f'[+] Gospider found {count} endpoints')
+
+
+
 #Removing duplicates -> then checking for their live 
+
     def rm_junk(self): #removing duplicates
         self.__make__file('_LiveUrls_')
         print('[+]Removing duplicates and checking for liveness')
         
         cmd = 'cat _gau_.txt _katana_.txt _gospider_.txt | sort -u | httpx -mc 200,301,302,403 -silent  > _LiveUrls_.txt' #opening all the files
-        print(f'[+]Process complete')
-        print(f'[+]File saved to _LiveUrls_.txt')
+        print(f'[+]Process starting')
+        print(f'[+]File created _LiveUrls_.txt')
 
         os.system(cmd)
 
@@ -90,7 +94,12 @@ class GetAllUrls:
 #Now running all with threads 
 
     def run_all(self):
-        methods = [self.run_gau, self.run_katana,self.run_gau]  # add more here later
+
+        self.__make__folder("Urls_collected")
+        os.chdir(path='Urls_collected')
+        
+        
+        methods = [self.run_gau, self.run_katana,self.run_gospider]  # add more here later
         threads = [threading.Thread(target=m) for m in methods]
 
         for t in threads:
@@ -100,9 +109,10 @@ class GetAllUrls:
 
         print('[+] ALL scans are now completed')
         self.rm_junk()
+        
 
 
 
 
-tool = GetAllUrls('abc.com')
+tool = GetAllUrls('newegg.com')
 tool.run_all()

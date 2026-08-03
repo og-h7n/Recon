@@ -2,3 +2,6 @@ gospider
 katana
 gau
 httpx
+arjun
+jsecret 
+mantra
