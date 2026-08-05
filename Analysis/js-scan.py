@@ -47,7 +47,7 @@ class Js_scanner:
         for t in threads:
             t.join()
         
-        print('[+]Scan Done')
+        print('[+]js scan completed')
 
 if __name__ == "__main__":
 

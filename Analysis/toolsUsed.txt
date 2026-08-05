@@ -5,3 +5,10 @@ httpx
 arjun
 jsecret 
 mantra
+ferox buster
+Dirsearch
+whatweb
+gowtiness
+nmap
+wafwoof
+Wappalyzer (CLI)

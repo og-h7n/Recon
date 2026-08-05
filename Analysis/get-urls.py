@@ -91,6 +91,18 @@ class GetAllUrls:
         count = os.popen('wc -l < _LiveUrls_.txt').read().strip()
         print(f'[+]Current URls : {count}')
 
+
+    def screen_shot(self):
+        print(f"[*]Now Taking screen shot of worth it targets , {'\033[91m'}Use brave browser ! {'\033[0m'}")
+
+        cmd = (
+                "cat _LiveUrls_.txt | grep -viE '\\.(js|css|json|woff|ttf|svg|png|jpg|gif)($|\\?)' > _screenshot_targets_.txt "
+                "&& gowitness scan file -f _screenshot_targets_.txt --threads 5 --chrome-path $(which brave-browser)"
+            )
+        os.system(cmd)
+
+        print("[+]Screen shots taken , Thank you for your time :)")
+
 #Now running all with threads 
 
     def run_all(self):
@@ -107,12 +119,14 @@ class GetAllUrls:
         for t in threads:
             t.join()
 
-        print('[+] ALL scans are now completed')
+        print('[+] ALL URL scans are now completed')
         self.rm_junk()
+
+        self.screen_shot()
         
 
 
 
-
-tool = GetAllUrls('newegg.com')
-tool.run_all()
+if __name__ == "__main__":
+    tool = GetAllUrls('http://testphp.vulnweb.com')
+    tool.screen_shot()

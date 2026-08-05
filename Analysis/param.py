@@ -41,7 +41,7 @@ class para_finder:
         for t in threads:
             t.join()
         
-        print('[+]Scan Done')
+        print('[+] Parameter are now stored to param.txt')
 
 if __name__ == "__main__":
 
