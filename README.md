@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🕸️ RECON-Analysis
+# 🕸️ RECON-**Analysis**
 
 ### *the whole attack surface, mapped out, automated where it counts*
 
