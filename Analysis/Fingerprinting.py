@@ -93,5 +93,3 @@ class fingerprinting:
         print('[+] Fingerprinting Done :)')
 
 
-obj = fingerprinting('https://newegg.com') #use https://
-obj.run_all()

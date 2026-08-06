@@ -48,9 +48,6 @@ class dir_brtfrce:
 
 
 
-if __name__ == "__main__":
-    obj = dir_brtfrce('abc.com')
-    obj.run_all()
-    
+
 
 

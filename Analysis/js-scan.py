@@ -37,6 +37,8 @@ class Js_scanner:
     
     def run_js(self):
         print('[*] Starting js scanner')
+        print('[*]Filtering for js files')
+        self.filter()
 
         
         methods = [self.mantra_scan,self.jsecret_scan]  # add more here later
@@ -48,11 +50,6 @@ class Js_scanner:
             t.join()
         
         print('[+]js scan completed')
-
-if __name__ == "__main__":
-
-    run = Js_scanner('_LiveUrls_.txt')
-    run.run_js()
 
 
 

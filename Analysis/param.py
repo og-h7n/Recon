@@ -43,8 +43,3 @@ class para_finder:
         
         print('[+] Parameter are now stored to param.txt')
 
-if __name__ == "__main__":
-
-    run = para_finder('_LiveUrls_.txt','https://abc.com')
-    run.run_js()
-

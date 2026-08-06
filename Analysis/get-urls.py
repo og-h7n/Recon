@@ -82,7 +82,7 @@ class GetAllUrls:
         self.__make__file('_LiveUrls_')
         print('[+]Removing duplicates and checking for liveness')
         
-        cmd = 'cat _gau_.txt _katana_.txt _gospider_.txt | sort -u | httpx -mc 200,301,302,403 -silent  > _LiveUrls_.txt' #opening all the files
+        cmd = 'cat _gau_.txt _katana_.txt _gospider_.txt | uro | httpx -mc 200,301,302,403 -silent  > _LiveUrls_.txt' #opening all the files
         print(f'[+]Process starting')
         print(f'[+]File created _LiveUrls_.txt')
 
@@ -127,6 +127,3 @@ class GetAllUrls:
 
 
 
-if __name__ == "__main__":
-    tool = GetAllUrls('http://testphp.vulnweb.com')
-    tool.screen_shot()

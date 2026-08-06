@@ -12,3 +12,4 @@ gowtiness
 nmap
 wafwoof
 Wappalyzer (CLI)
+uro
