@@ -20,7 +20,7 @@ class GetAllUrls:
     
     #for creating files for the tools and store there output indivisually   
     def __make__file(self,tool):
-        Path(f"{tool}.txt")
+        Path(f"{tool}.txt").touch()
 
     #for runnning gau
 
@@ -105,24 +105,7 @@ class GetAllUrls:
 
 #Now running all with threads 
 
-    def run_all(self):
-
-        self.__make__folder("Urls_collected")
-        os.chdir(path='Urls_collected')
         
-        
-        methods = [self.run_gau, self.run_katana,self.run_gospider]  # add more here later
-        threads = [threading.Thread(target=m) for m in methods]
-
-        for t in threads:
-            t.start()
-        for t in threads:
-            t.join()
-
-        print('[+] ALL URL scans are now completed')
-        self.rm_junk()
-
-        self.screen_shot()
         
 
 

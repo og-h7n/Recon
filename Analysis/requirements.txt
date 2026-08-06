@@ -1,5 +1,17 @@
-subprocess 
-os 
-concurrent.futures
-Path
-threading
+# Python dependencies (install with: pip install -r requirements.txt --break-system-packages)
+rich>=13.0.0
+
+# ---------------------------------------------------------------------------
+# NOTE: os, threading, pathlib, subprocess, and concurrent.futures are all
+# part of the Python standard library - they ship with Python itself and
+# should NOT be pip-installed (pip install would fail on them).
+#
+# This script also depends on the following external CLI tools, which are
+# NOT Python packages and must be installed separately (via go install,
+# apt, pip, or their own release binaries). See README.md for install
+# instructions for each.
+#
+#   gau, katana, gospider, uro, httpx, dirsearch, feroxbuster,
+#   whatweb, nmap, wafw00f, wappalyzer (CLI), mantra, jsecret,
+#   arjun, gowitness, brave-browser (or another Chrome-based browser)
+# ---------------------------------------------------------------------------

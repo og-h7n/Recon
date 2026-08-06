@@ -4,7 +4,6 @@ import os
 import threading
 
 
-print('Hi')
 class fingerprinting:
     
     def __init__(self,target):
@@ -63,7 +62,7 @@ class fingerprinting:
     def curl(self):
         print("[+]Getting Raw headers")
         cmd = f"curl -I {self.target} -o headers.txt"
-
+        os.system(cmd)
         print('[+]header collected and stored to headers.txt')
 
     
