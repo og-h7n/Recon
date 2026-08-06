@@ -75,14 +75,14 @@ pip install -r requirements.txt --break-system-packages
 
 ### Make it globally accessible (optional)
 
-Run `install.sh` to add a `recon` command usable from any directory:
+Run `install.sh` to add a `analysis` command usable from any directory:
 
 ```bash
 chmod +x install.sh
 ./install.sh
 ```
 
-This creates a wrapper at `/usr/local/bin/recon` that points back to
+This creates a wrapper at `/usr/local/bin/analysis` that points back to
 `main.py` in this folder. Once installed, run it from anywhere:
 
 ```bash
@@ -93,7 +93,7 @@ Output files always land in whatever directory you're standing in when
 you run `recon`, not the install location. Uninstall anytime with:
 
 ```bash
-sudo rm /usr/local/bin/recon
+sudo rm /usr/local/bin/analysis
 ```
 
 Then install the external CLI tools listed above. Most Go-based tools can
@@ -126,7 +126,7 @@ python3 main.py target.com
 Or, if you've run `install.sh`:
 
 ```bash
-recon target.com
+analysis target.com
 ```
 
 This will create two subfolders in your working directory as it runs:
@@ -158,6 +158,5 @@ Suggestions are welcome — open an issue or a PR.
 
 Discord: https://discord.gg/d9wFhhnwFe
 
-Miro board: https://miro.com/app/board/uXjVHAlbwYw=/?share_link_id=227022886951
 
 Created by [@h7n](https://github.com/og-h7n)
