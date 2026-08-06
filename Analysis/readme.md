@@ -1,4 +1,4 @@
-# Analysis Automation
+# Recon + Analysis Automation
 
 An automated recon script built for bug bounty hunting - it chains together
 URL collection, fingerprinting, JS secret scanning, parameter discovery, and
@@ -73,6 +73,29 @@ cd Recon/Analysis
 pip install -r requirements.txt --break-system-packages
 ```
 
+### Make it globally accessible (optional)
+
+Run `install.sh` to add a `recon` command usable from any directory:
+
+```bash
+chmod +x install.sh
+./install.sh
+```
+
+This creates a wrapper at `/usr/local/bin/recon` that points back to
+`main.py` in this folder. Once installed, run it from anywhere:
+
+```bash
+recon target.com
+```
+
+Output files always land in whatever directory you're standing in when
+you run `recon`, not the install location. Uninstall anytime with:
+
+```bash
+sudo rm /usr/local/bin/recon
+```
+
 Then install the external CLI tools listed above. Most Go-based tools can
 be installed like this (requires Go):
 
@@ -98,6 +121,12 @@ sudo apt install nmap whatweb wafw00f -y
 
 ```bash
 python3 main.py target.com
+```
+
+Or, if you've run `install.sh`:
+
+```bash
+recon target.com
 ```
 
 This will create two subfolders in your working directory as it runs:
