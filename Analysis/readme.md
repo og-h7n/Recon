@@ -1,4 +1,4 @@
-# Recon + Analysis Automation
+# Analysis Automation for subdomains
 
 An automated recon script built for bug bounty hunting - it chains together
 URL collection, fingerprinting, JS secret scanning, parameter discovery, and
@@ -15,7 +15,7 @@ took.
 
 Running `main.py` walks through the following, in order:
 
-1. **URL Collection** — `gau`, `katana`, and `gospider` run in parallel to
+1. **Endpoint Collection** — `gau`, `katana`, and `gospider` run in parallel to
    pull every URL they can find for the target. Results are merged,
    deduplicated (`uro`), and checked for liveness (`httpx`). Live,
    non-static-asset endpoints are then screenshotted with `gowitness`.
