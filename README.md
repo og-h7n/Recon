@@ -1,7 +1,6 @@
 <div align="center">
 
-# 🕸️ RECON-**Analysis**
-
+# 🕸️ RECON-ANALYSIS
 ### *the whole attack surface, mapped out, automated where it counts*
 
 `recon` → `analysis` → `results`
