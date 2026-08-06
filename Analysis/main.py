@@ -41,6 +41,9 @@ def main(target: str):
     ui.section("URL Collection")
     urls = GetAllUrls(target)
 
+    os.makedirs("Urls_collected", exist_ok=True)
+    os.chdir("Urls_collected")
+
     with ui.step("gau") as s:
         try:
             urls.run_gau()
@@ -78,6 +81,17 @@ def main(target: str):
 
     # get-urls.py's run_all() chdir's into "Urls_collected" - urls live there now
     live_urls_path = os.path.join(base_dir, "Urls_collected", "_LiveUrls_.txt")
+
+    # also drop a copy at the root, in case you want to run other tools
+    # against it manually without digging into Urls_collected/
+    with ui.step("copy _LiveUrls_.txt to root") as s:
+        try:
+            import shutil
+            root_copy = os.path.join(base_dir, "_LiveUrls_.txt")
+            shutil.copy(live_urls_path, root_copy)
+            s.result(note=f"copied to {root_copy}")
+        except Exception as e:
+            s.fail(str(e))
 
     # ------------------------------------------------------------------
     # 2. Fingerprinting: whatweb, httpx, nmap, wafw00f, wappalyzer, curl
