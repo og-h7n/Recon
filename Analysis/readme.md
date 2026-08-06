@@ -1,4 +1,4 @@
-# Recon + Analysis Automation
+# Analysis Automation
 
 An automated recon script built for bug bounty hunting - it chains together
 URL collection, fingerprinting, JS secret scanning, parameter discovery, and
