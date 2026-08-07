@@ -13,11 +13,12 @@ class curl:
     
     #Creating a folder CURL
     def folder(self):
+        print('[+]Created Folder CURL to store files')
         os.makedirs(name='CURL')
         os.chdir('CURL')
 
     #using certspotter api to fetch subdomains from SSL certs    
-    def crt_sh(self):
+    def crt(self):
         print(f'[*]Searching for related subdomains')
         print(f'[*]Target : {self.site}')
 
@@ -68,8 +69,8 @@ class curl:
     
     #using wayback machine for subdomains archives 
     def wayback(self):
-        print('[+]Searcing for archive subdomains')
-        print('[+]Using wayback machine')
+        print('[*]Searcing for archive subdomains')
+        print('[*]Using wayback machine')
 
         cmd = (
             f'curl -s "http://index.commoncrawl.org/CC-MAIN-2024-10-index?url=*.{self.site}&output=json" '
@@ -102,7 +103,29 @@ class curl:
         print(f'[+]CSP related subdomains found : {count}')
         print('[+]Results are stored in csp.txt')
     
+    def cleaner(self):
+        print('[*]Clearing duplicates and checking for Liveness')
+        cmd = (
+            "cat *.txt "
+            "| sed -E 's#^(https?://)##; s#^#https://#' "
+            "| uro "
+            "| httpx -mc 200,301,403,401 -silent > Curl_Url.txt"
+        )
+        os.system(cmd)
+        count = os.popen('wc -l < Curl_Url.txt').read().strip()
+
+        print(f'[+] {count} live subdomains found')
+        print('[+] Moving to root directory')
+
+        os.system('cp Curl_Url.txt ../')
+        print('[+] Transfer successful')
+        
 
 if __name__ == '__main__':
     obj = curl('abc.com') #use site.com 
     obj.folder()
+    obj.crt()
+    obj.alien_vault()
+    obj.virus_total()
+    obj.wayback()
+    obj.cleaner()
